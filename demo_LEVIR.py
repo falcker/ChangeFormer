@@ -23,8 +23,8 @@ def get_args():
     parser = ArgumentParser()
     parser.add_argument('--project_name', default='CD_ChangeFormerV6_LEVIR_b16_lr0.0001_adamw_train_test_200_linear_ce_multi_train_True_multi_infer_False_shuffle_AB_False_embed_dim_256', type=str)
     parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
-    parser.add_argument('--checkpoint_root', default='/media/lidan/ssd2/ChangeFormer/checkpoints/', type=str)
-    parser.add_argument('--output_folder', default='samples_LEVIR/predict_CD_ChangeFormerV6', type=str)
+    parser.add_argument('--checkpoint_root', default='./checkpoints/', type=str)
+    parser.add_argument('--output_folder', default='Falcker_samples_LEVIR/predict_CD_ChangeFormerV6', type=str)
 
     # data
     parser.add_argument('--num_workers', default=0, type=int)
@@ -49,10 +49,11 @@ def get_args():
 if __name__ == '__main__':
 
     args = get_args()
-    utils.get_device(args)
-    device = torch.device("cuda:%s" % args.gpu_ids[0]
-                          if torch.cuda.is_available() and len(args.gpu_ids)>0
-                        else "cpu")
+    # utils.get_device(args)
+    # device = torch.device("cuda:%s" % args.gpu_ids[0]
+    #                       if torch.cuda.is_available() and len(args.gpu_ids)>0
+    #                     else "cpu")
+    device = torch.device("cpu")
     args.checkpoint_dir = os.path.join(args.checkpoint_root, args.project_name)
     os.makedirs(args.output_folder, exist_ok=True)
 
